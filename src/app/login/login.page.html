@@ -19,14 +19,14 @@
   <ion-card-content>
 
     <ion-item>
-      <ion-input label="Usuario:" placeholder="usermail@confiteria.cl"></ion-input>
+      <ion-input label="Usuario:" [(ngModel)]="userLoginModal.email" placeholder="usermail@duocuc.cl"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-input label="Contraseña:" type="password" placeholder="*********"></ion-input>
+      <ion-input label="Contraseña:" [(ngModel)]="userLoginModal.password" type="password" placeholder="*********"></ion-input>
     </ion-item>
 
-    <ion-button>Ingresar</ion-button>
+    <ion-button (click)="userLogin(userLoginModal)">Ingresar</ion-button>
 
     <ion-item button>
       <ion-label color="secondary">¿Olvidaste tu contraseña?</ion-label>

@@ -1,4 +1,4 @@
 export interface IUserLogin {
-    rut: string;
+    email: string;
     password: string;
 }

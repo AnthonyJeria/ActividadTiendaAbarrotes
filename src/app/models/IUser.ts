@@ -7,6 +7,4 @@ export interface IUser {
     last_name: string;
     password: string;
     user_type: String;
-    phone: string;
-    address: String;
 }

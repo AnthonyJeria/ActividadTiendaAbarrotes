@@ -8,8 +8,6 @@ export class UserModel {
         public last_name: string,
         public password: string,
         public user_type: string,
-        public phone: String,
-        public address: String
     ) {
     }
 

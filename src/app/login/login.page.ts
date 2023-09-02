@@ -43,6 +43,7 @@ export class LoginPage implements OnInit {
         let sendInfo = this.route.navigate(['/vista-alumno'], userInfoSend);
       }
     }
+
     this.userLoginModalRestart();
     return false;
     

@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonCard, IonicModule } from '@ionic/angular';
 import { UserModel } from '../models/UserModel';
 import { IUserLogin } from '../models/IUserLogin';
 import { NavigationExtras, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import type { QueryList } from '@angular/core';
+import type { Animation } from '@ionic/angular';
+import { AnimationController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +18,11 @@ import { AlertController } from '@ionic/angular';
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class LoginPage implements OnInit {
+
+  @ViewChild(IonCard, { read: ElementRef })
+  card!: ElementRef<HTMLIonButtonElement>;
+
+  private animation: Animation | undefined;
 
   listUser: UserModel[] = [
     new UserModel(1,'11987654-1','jgomez@duocuc.cl','jorge','gomez','jorge123','Alumno'),
@@ -26,10 +34,22 @@ export class LoginPage implements OnInit {
     password: ''
   };
 
-  constructor(private route: Router, private alertController: AlertController) { }
+  constructor(private route: Router, private alertController: AlertController, private animationCtrl: AnimationController) { }
 
   ngOnInit() {
     this.userLoginModalRestart()
+  }
+
+  ngAfterViewInit() {
+    this.animation = this.animationCtrl
+      .create()
+      .addElement(this.card.nativeElement)
+      .duration(3000)
+      .iterations(Infinity)
+      .direction('alternate')
+      .fromTo('background', 'blue', 'var(--background)');
+
+    this.animation.play();
   }
 
   async presentAlert() {

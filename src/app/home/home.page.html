@@ -16,16 +16,16 @@
   <ion-img src="../../assets/imagenes/logo.png" alt="logo"></ion-img>
 
   <ion-input label="Usuario" label-placement="floating" fill="outline"
-      placeholder="Escribe tu usuario Duoc"></ion-input>
+      placeholder="Escribe tu usuario Duoc" [(ngModel)]="userLoginModal.email"></ion-input>
 
   <ion-input type="password" label="Contraseña" label-placement="floating"
-    fill="outline" placeholder="Escribe tu contraseña"></ion-input>
+    fill="outline" placeholder="Escribe tu contraseña" [(ngModel)]="userLoginModal.password"></ion-input>
   
-  <ion-card #card (click)="traerDatos()" class="ion-text-center">
+  <ion-card #card (click)="userLogin(userLoginModal)" class="ion-text-center">
     <ion-card-content>Iniciar Sesión</ion-card-content>
-  </ion-card>
+  </ion-card> 
 
-  <a href="https://passwordreset.microsoftonline.com/?ru=https%3a%2f%2flogin.microsoftonline.com%2f72fd0b5a-8a6a-4cff-89f6-bde961f7e250%2freprocess%3fctx%3drQQIARAAnVG9a9RQAM9rrrUWtcXJwSFDXaq5JO9d8t5d6XB3BSveWT9aznaR99nmkiZpcg3aXSiIoCgOogiCUA5cCoJIh27CTcVJBAcHQSqiY0cj_QeKy2_7fU_psGzXJj1cqTpIQlM62DYrmGCTIKRMiWysCBbMk256dmzi4cd3pa_3nzbfXr3wpNz99L0P3NVeL8lqliXvJjL1ZcR9mvt5XBYbMS_z0KIbvVUrTmTkC25xGoaM8uA9APsA_ACgP2QQ4hU2lFQFrTgSKYolRNiBNoGIcyS-DI3P1wsR-A_i1N-Uz3XDpRIqxRRHiiAoqM08DjmkEDKhJHP6-hRN_CLWcZrt6JMYKmEzl5qEetSscKVMUlWeyYSseo4qIrn2QF886mEkaaz8UBpyjfqhESsV-pG8QzmXWWYc39c6YnzWwX4JHJRO2XptdHRsQjunGdphCbweLhZf-v1ma_rB-db2zouXu98ua4NhK2oIdmW22Wgtx5KljfYCmxMXF9faHdEM5tt5p5PiJLbd60F2Y4bUnEcj4M8I2DqhfTj5f2ftndYOz2y_ejwYPPv5a-5g_NICQfUgyJLGPdL1bt9CQZ2vdMk6uRb2lm9G-dJmgNrp7Ere4vHMXw2&mkt=es&hosted=0&device_platform=Windows+10"
+  <a href=""
   style="text-align: center; margin: 10px; cursor: pointer;"> <span> ¿Olvidaste tu
     contraseña? </span> Toca Aquí!>
   </a>

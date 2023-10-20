@@ -1,9 +1,3 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>App Asistencia Duoc</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
@@ -16,7 +10,7 @@
   <ion-img src="../../assets/imagenes/logo.png" alt="logo"></ion-img>
 
   <ion-input label="Usuario" label-placement="floating" fill="outline"
-      placeholder="Escribe tu usuario Duoc" [(ngModel)]="userLoginModal.email"></ion-input>
+      placeholder="Escribe tu correo electronico" [(ngModel)]="userLoginModal.email"></ion-input>
 
   <ion-input type="password" label="Contraseña" label-placement="floating"
     fill="outline" placeholder="Escribe tu contraseña" [(ngModel)]="userLoginModal.password"></ion-input>
@@ -25,10 +19,8 @@
     <ion-card-content>Iniciar Sesión</ion-card-content>
   </ion-card> 
 
-  <a href=""
-  style="text-align: center; margin: 10px; cursor: pointer;"> <span> ¿Olvidaste tu
-    contraseña? </span> Toca Aquí!>
-  </a>
+  <a routerLink="/recupera-clave" style="text-align: center; margin: 10px; cursor: pointer;"> <span> ¿Olvidaste tu
+    contraseña? </span>Toca Aquí!</a>
 
 </div>
 

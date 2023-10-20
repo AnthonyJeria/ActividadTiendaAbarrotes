@@ -100,5 +100,11 @@ export class HomePage {
       }
     )
   }
+
+  //recuperar contraseña
+
+recuperarClave(){
+  this.route.navigate(['recupera-clave']);
+}
   
 }

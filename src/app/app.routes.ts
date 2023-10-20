@@ -9,6 +9,10 @@ export const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
+  },  {
+    path: 'recupera-clave',
+    loadComponent: () => import('./page/recupera-clave/recupera-clave.page').then( m => m.RecuperaClavePage)
   },
+
 
 ];

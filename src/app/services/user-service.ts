@@ -30,5 +30,9 @@ export class UserService {
     getLoginUser(correo_alumno: string, password: string): Observable<AlumnoModel>{
         return this._httpclient.get<AlumnoModel>(this.URL_SUPABASE+'?correo_alumno=eq.'+correo_alumno+'&clave_alumno=eq.'+password+'&select=*',{ headers: this.supabaseheaders.set('Accept', 'application/vnd.pgrst.object+json'), responseType: 'json' });
     }
+
+    getClave(correo_alumno: string): Observable<AlumnoModel>{
+        return this._httpclient.get<AlumnoModel>(this.URL_SUPABASE+'?correo_alumno=eq.'+correo_alumno+'&select=clave_alumno',{ headers: this.supabaseheaders.set('Accept', 'application/vnd.pgrst.object+json'), responseType: 'json' });
+    }
     
 }

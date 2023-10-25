@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonCard, IonicModule } from '@ionic/angular';
 import { UserService } from 'src/app/services/user-service';
 import { IUserLogin } from 'src/app/models/IUserLogin';
-import { NavigationExtras, RouterLinkWithHref } from '@angular/router';
+import { NavigationExtras, Router, RouterLinkWithHref } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { Preferences } from '@capacitor/preferences';
 import { AlumnoModel } from 'src/app/models/UsersModel';
@@ -27,7 +27,7 @@ export class RecuperaClavePage implements OnInit {
     password: ''
   };
 
-  constructor(private _usuarioService: UserService) { }
+  constructor(private _usuarioService: UserService, private route: Router) { }
 
   userLoginModalRestart(): void{
     this.userLoginModal.email = '';
@@ -46,6 +46,10 @@ export class RecuperaClavePage implements OnInit {
       key: 'user',
       value: JSON.stringify(user)
     });
+  }
+
+  volverLogin(){
+    this.route.navigate(['home']);
   }
 
   async recuperarClave(userLoginInfo: IUserLogin) {

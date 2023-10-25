@@ -13,6 +13,10 @@ export const routes: Routes = [
     path: 'recupera-clave',
     loadComponent: () => import('./page/recupera-clave/recupera-clave.page').then( m => m.RecuperaClavePage)
   },
+  {
+    path: 'vista-alumno',
+    loadComponent: () => import('./page/vista-alumno/vista-alumno.page').then( m => m.VistaAlumnoPage)
+  },
 
 
 ];

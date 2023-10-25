@@ -72,33 +72,38 @@ export class HomePage {
   }
 
   async userLogin(userLoginInfo: IUserLogin) {
-    this._usuarioService.getLoginUser(userLoginInfo.email, userLoginInfo.password).subscribe(
-      {
-        next: (user) => {
-          console.log(user);
-          if (user) {
-            //EXISTE
-            let userInfoSend: NavigationExtras = {
-              state: {
-                userInfo: user.id_alumno
+
+    if ((userLoginInfo.email == "") || (userLoginInfo.password =="")) {
+      this.presentAlert2();
+    }else{
+          this._usuarioService.getLoginUser(userLoginInfo.email, userLoginInfo.password).subscribe(
+            {
+              next: (user) => {
+                if (user) {
+                  //EXISTE
+                  let userInfoSend: NavigationExtras = {
+                    state: {
+                      userInfo: user
+                    }
+                  }
+
+                  this.setObject(user);
+                  console.log(userInfoSend);
+                  let sendInfo = this.route.navigate(['/vista-alumno'], userInfoSend);
+                } else {
+                  //NO EXISTE
+                }
+              },
+              error: (err) => {
+                this.presentAlert();
+                this.userLoginModalRestart();
+              },
+              complete: () => {
+                this.userLoginModalRestart();
               }
             }
-            console.log("Usuario existe...");
-            this.setObject(user);
-            console.log(userInfoSend);
-          } else {
-            //NO EXISTE
-            console.log("Usuario no existe...");
-          }
-        },
-        error: (err) => {
-
-        },
-        complete: () => {
-
-        }
-      }
-    )
+          )
+    }
   }
 
   //recuperar contraseña

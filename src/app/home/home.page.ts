@@ -27,7 +27,7 @@ export class HomePage {
     password: ''
   };
 
-  constructor(private route: Router, private alertController: AlertController, private _usuarioService: UserService) {}
+  constructor(private route: Router, private alertController: AlertController, private usuarioService: UserService) {}
 
   async presentAlert() {
     const alert = await this.alertController.create({
@@ -48,8 +48,6 @@ export class HomePage {
 
     await alert.present();
   }
-
-  validar = false;
 
   userLoginModalRestart(): void{
     this.userLoginModal.email = '';
@@ -76,7 +74,7 @@ export class HomePage {
     if ((userLoginInfo.email == "") || (userLoginInfo.password =="")) {
       this.presentAlert2();
     }else{
-          this._usuarioService.getLoginUser(userLoginInfo.email, userLoginInfo.password).subscribe(
+          this.usuarioService.getLoginUser(userLoginInfo.email, userLoginInfo.password).subscribe(
             {
               next: (user) => {
                 if (user) {

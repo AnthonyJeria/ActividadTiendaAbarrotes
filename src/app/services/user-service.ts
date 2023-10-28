@@ -8,7 +8,10 @@ import { Observable, map } from "rxjs";
 @Injectable({ providedIn: 'root' })
 export class UserService {
 
-    URL_SUPABASE = 'https://jhrdaqawmuiumnkewpdt.supabase.co/rest/v1/Alumno'
+    URL_SUPABASEALUMNO = 'https://jhrdaqawmuiumnkewpdt.supabase.co/rest/v1/Alumno'
+
+    URL_SUPABASEASISTENCIA = 'https://jhrdaqawmuiumnkewpdt.supabase.co/rest/v1/Asistencia'
+  static this: any;
 
 
     constructor(private _httpclient: HttpClient) {
@@ -20,19 +23,31 @@ export class UserService {
 
     getUserListSupaBase(): Observable<AlumnoModel[]> {
         console.log(this.supabaseheaders);
-        return this._httpclient.get<AlumnoModel[]>(this.URL_SUPABASE, { headers: this.supabaseheaders, responseType: 'json' });
+        return this._httpclient.get<AlumnoModel[]>(this.URL_SUPABASEALUMNO, { headers: this.supabaseheaders, responseType: 'json' });
     }
 
     getUser(id_alumno: number): Observable<AlumnoModel>{
-        return this._httpclient.get<AlumnoModel>(this.URL_SUPABASE+'?id_alumno=eq.'+id_alumno,{ headers: this.supabaseheaders.set('Accept', 'application/vnd.pgrst.object+json'), responseType: 'json' });
+        return this._httpclient.get<AlumnoModel>(this.URL_SUPABASEALUMNO+'?id_alumno=eq.'+id_alumno,{ headers: this.supabaseheaders.set('Accept', 'application/vnd.pgrst.object+json'), responseType: 'json' });
     }
    
     getLoginUser(correo_alumno: string, password: string): Observable<AlumnoModel>{
-        return this._httpclient.get<AlumnoModel>(this.URL_SUPABASE+'?correo_alumno=eq.'+correo_alumno+'&clave_alumno=eq.'+password+'&select=*',{ headers: this.supabaseheaders.set('Accept', 'application/vnd.pgrst.object+json'), responseType: 'json' });
+        return this._httpclient.get<AlumnoModel>(this.URL_SUPABASEALUMNO+'?correo_alumno=eq.'+correo_alumno+'&clave_alumno=eq.'+password+'&select=*',{ headers: this.supabaseheaders.set('Accept', 'application/vnd.pgrst.object+json'), responseType: 'json' });
     }
 
     getClave(correo_alumno: string): Observable<AlumnoModel>{
-        return this._httpclient.get<AlumnoModel>(this.URL_SUPABASE+'?correo_alumno=eq.'+correo_alumno+'&select=clave_alumno',{ headers: this.supabaseheaders.set('Accept', 'application/vnd.pgrst.object+json'), responseType: 'json' });
+        return this._httpclient.get<AlumnoModel>(this.URL_SUPABASEALUMNO+'?correo_alumno=eq.'+correo_alumno+'&select=clave_alumno',{ headers: this.supabaseheaders.set('Accept', 'application/vnd.pgrst.object+json'), responseType: 'json' });
+    }
+
+    
+
+    updateAsistencia(id_alumno: number): Observable<any>{
+        
+        const newBodyData = {
+            "estado": true
+          };
+          
+
+        return this._httpclient.patch<any>(this.URL_SUPABASEASISTENCIA+'id_alumno=eq.'+id_alumno,newBodyData,{ headers: this.supabaseheaders.set('Accept', 'application/vnd.pgrst.object+json'), responseType: 'json' });
     }
     
 }

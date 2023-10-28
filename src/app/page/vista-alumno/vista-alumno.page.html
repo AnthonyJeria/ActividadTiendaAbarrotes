@@ -5,16 +5,20 @@
     </ion-toolbar>
   </ion-header>
 
-  
+  <ion-img src="../../assets/imagenes/logo.png" alt="logo"></ion-img>
 
   <ion-card>
     <ion-card-header>
-      <ion-card-title>{{ userInfoReceived?.nombre }} {{ userInfoReceived?.appaterno }}</ion-card-title>
+      <ion-card-title>Bienvenido {{ userInfoReceived?.nombre }} {{ userInfoReceived?.appaterno }}</ion-card-title>
     </ion-card-header>
   
     <ion-card-content>
       Escanea el QR de la clase para marcar tu asistencia
     </ion-card-content>
+  </ion-card>
+
+  <ion-card #card (click)="marcarAssistencia()" class="ion-text-center, button">
+    <ion-card-content>Marcar Asistencia</ion-card-content>
   </ion-card>
 
 </ion-content>

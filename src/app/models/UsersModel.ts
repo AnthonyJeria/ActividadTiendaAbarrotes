@@ -12,3 +12,15 @@ export interface AlumnoModel {
     correo_alumno: string
     clave_alumno: string
 }
+
+export interface ProfesorModel {
+
+    id_profesor: number
+    rut: number
+    dv: string
+    nombre: string
+    appaterno: string
+    apmaterno: string
+    correo_electronico: string
+    clave_profe: string
+}

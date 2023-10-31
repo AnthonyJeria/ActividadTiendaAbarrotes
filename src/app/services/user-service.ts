@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { AlumnoModel } from "../models/UsersModel";
+import { AlumnoModel, ProfesorModel } from "../models/UsersModel";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, map } from "rxjs";
 
@@ -10,7 +10,7 @@ export class UserService {
 
     URL_SUPABASEALUMNO = 'https://jhrdaqawmuiumnkewpdt.supabase.co/rest/v1/Alumno'
 
-    URL_SUPABASEASISTENCIA = 'https://jhrdaqawmuiumnkewpdt.supabase.co/rest/v1/Asistencia'
+    URL_SUPABASEPROFE = 'https://jhrdaqawmuiumnkewpdt.supabase.co/rest/v1/Profesor'
   static this: any;
 
 
@@ -38,16 +38,8 @@ export class UserService {
         return this._httpclient.get<AlumnoModel>(this.URL_SUPABASEALUMNO+'?correo_alumno=eq.'+correo_alumno+'&select=clave_alumno',{ headers: this.supabaseheaders.set('Accept', 'application/vnd.pgrst.object+json'), responseType: 'json' });
     }
 
-    
-
-    updateAsistencia(id_alumno: number): Observable<any>{
-        
-        const newBodyData = {
-            "estado": true
-          };
-          
-
-        return this._httpclient.patch<any>(this.URL_SUPABASEASISTENCIA+'id_alumno=eq.'+id_alumno,newBodyData,{ headers: this.supabaseheaders.set('Accept', 'application/vnd.pgrst.object+json'), responseType: 'json' });
+    getLoginProfe(correo_profesor: string, password: string): Observable<ProfesorModel>{
+        return this._httpclient.get<ProfesorModel>(this.URL_SUPABASEPROFE+'?correo_electronico=eq.'+correo_profesor+'&clave_profe=eq.'+password+'&select=*',{ headers: this.supabaseheaders.set('Accept', 'application/vnd.pgrst.object+json'), responseType: 'json' });
     }
     
 }

@@ -1,0 +1,39 @@
+.formulario{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+ion-input{
+    max-width: 90%;
+    margin-bottom: 10px;
+}
+
+ion-card{
+    margin-top: 30px;
+    width: 80%;
+    color: black;
+    font-weight: bold;
+
+    color: white;
+    background: rgb(16, 123, 199);
+    margin: 10px;
+}
+
+ion-img{
+    max-width: 90%;
+    margin-bottom: 10px;
+}
+
+a{
+    text-decoration: none;
+    font-size: 18px;
+    color: rgb(16, 123, 199);
+    font-weight: bold;
+}
+
+a span{
+    color: rgb(254, 191, 0);
+}

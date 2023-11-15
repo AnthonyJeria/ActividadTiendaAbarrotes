@@ -53,7 +53,7 @@ export class RecuperaClavePage implements OnInit {
   }
 
   async recuperarClave(userLoginInfo: IUserLogin) {
-    this._usuarioService.getClave(userLoginInfo.email).subscribe(
+    this._usuarioService.getClaveAlumno(userLoginInfo.email).subscribe(
       {
         next: (user) => {
           console.log(user);

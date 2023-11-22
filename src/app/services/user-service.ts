@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { AlumnoModel, ProfesorModel } from "../models/UsersModel";
+import { ClaseModel } from "../models/ServiciosModel";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, map } from "rxjs";
+import { Observable, catchError } from "rxjs";
 
 
 
@@ -11,6 +12,7 @@ export class UserService {
     URL_SUPABASEALUMNO = 'https://jhrdaqawmuiumnkewpdt.supabase.co/rest/v1/Alumno'
 
     URL_SUPABASEPROFE = 'https://jhrdaqawmuiumnkewpdt.supabase.co/rest/v1/Profesor'
+
   static this: any;
 
 
@@ -32,5 +34,4 @@ export class UserService {
     getLoginProfe(correo_profesor: string, password: string): Observable<ProfesorModel>{
         return this._httpclient.get<ProfesorModel>(this.URL_SUPABASEPROFE+'?correo_electronico=eq.'+correo_profesor+'&clave_profe=eq.'+password+'&select=*',{ headers: this.supabaseheaders.set('Accept', 'application/vnd.pgrst.object+json'), responseType: 'json' });
     }
-    
 }

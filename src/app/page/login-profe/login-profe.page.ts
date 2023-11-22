@@ -103,10 +103,4 @@ export class LoginProfePage implements OnInit {
     }
   }
 
-  //recuperar contraseña
-
-//recuperarClave(){
-//  this.route.navigate(['recupera-clave']);
-//}
-
 }

@@ -1,46 +1,40 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AlertController, IonicModule, IonModal } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { AlertController, IonicModule } from '@ionic/angular';
+import { Router, RouterLinkWithHref } from '@angular/router';
 import { ProfesorModel } from 'src/app/models/UsersModel';
-import { ClaseModel } from 'src/app/models/ServiciosModel';
+import { createClient } from '@supabase/supabase-js';
+import { environment } from 'src/environments/environment';
 import { ClaseService } from 'src/app/services/clase-service';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-vista-profe',
   templateUrl: './vista-profe.page.html',
   styleUrls: ['./vista-profe.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, HttpClientModule, RouterLinkWithHref],
+  providers: [ClaseService]
 })
 export class VistaProfePage implements OnInit {
-  @ViewChild(IonModal) modal!: IonModal;
 
   userInfoReceived: ProfesorModel | undefined;
   idUserHtmlRouterLink: any;
 
-  clases : any;
-  clase: ClaseModel = {
-    id_clase: 0,
-    fecha: new Date(),
-    id_sala: 0,
-    id_seccion: 0,
-    estado: false
+  mostrarImagen = false;
+  imagenSrc = '../../assets/imagenes/logo.png';
 
-  };
+  private supabase_C = createClient(environment.supabaseUrl_C, environment.supabaseKey);
 
-  constructor(private router: Router,private claseServisio: ClaseService, private alertController: AlertController) {
+  constructor(private router: Router, private alertController: AlertController, private claseService: ClaseService) {
     this.userInfoReceived = this.router.getCurrentNavigation()?.extras.state?.['userInfo'];
   }
 
   ngOnInit() {
+    this.GetClase();
   }
-
-  //async getClases() {
-  //  this.clases = this.claseServisio.getClases();
-  //  console.log(this.clases);
-  //}
 
   async presentAlert() {
     const alert = await this.alertController.create({
@@ -79,5 +73,87 @@ export class VistaProfePage implements OnInit {
     await alert.present();
   }
 
+  iniciarClase(): void{
+
+    const today = new Date();
+    const fechaHoy = today.toISOString().split('T')[0];
+
+    this.supabase_C.from('Clase').select('id_clase').eq('estado',true).then(({ data, error }) => {
+      if (error) {
+        console.error('Error fetching data:', error);
+        
+      } else {
+
+        console.log(data);
+
+        if(data.length == 0){
+
+          this.supabase_C.from('Clase').insert({fecha: fechaHoy, id_seccion : 1, id_sala : 1, estado : true})
+          .then(({ data, error }) => {
+            if (error) {
+              console.error('Error fetching data:', error);
+            } else {
+              this.presentAlert();
+            }
+          });
+
+        }else{
+          this.presentAlert2();
+        }
+
+      }
+    });
+  }
+
+  //--------------------------------------------------------------------------
+
+  GetClase(): void{
+    
+  }
+
+  //--------------------------------------------------------------------------
+
+  generarQR(): void{
+
+    const today = new Date();
+    const fechaHoy = today.toISOString().split('T')[0];
+
+    const qr = this.claseService.QRgenerator(fechaHoy, 1, 1);
+    console.log(qr)
+
+    this.mostrarImagen = !this.mostrarImagen;
+    this.imagenSrc = qr;
+
+  }
+
+  //--------------------------------------------------------------------------
+
+  terminarClase(): void{
+
+    this.supabase_C.from('Clase').select('id_clase').eq('estado',true).then(({ data, error }) => {
+      if (error) {
+        console.error('Error fetching data:', error);
+      } else {
+
+        console.log(data);
+
+        if(data.length >= 1){
+
+          this.supabase_C.from('Clase').update({estado : false}).eq('estado', true)
+          .then(({ data, error }) => {
+            if (error) {
+              console.error('Error fetching data:', error);
+            } else {
+              this.presentAlert3();
+            }
+          });
+
+        }else{
+          this.presentAlert4();
+        }
+
+      }
+    });
+  }
 
 }

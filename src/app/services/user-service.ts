@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { AlumnoModel, ProfesorModel } from "../models/UsersModel";
-import { ClaseModel } from "../models/ServiciosModel";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError } from "rxjs";
 

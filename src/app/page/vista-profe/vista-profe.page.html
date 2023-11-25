@@ -17,19 +17,10 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card #card  class="ion-text-center, button">
+  <ion-card #card (click)="generarQR()" class="ion-text-center, button">
     <ion-card-content>Iniciar clase</ion-card-content>
   </ion-card>
 
-  <ion-list>
-    <ion-item-sliding *ngFor="let clase of clases">
-      <ion-item>
-        <ion-label>{{ clase.fecha }}
-          <p>{{ clase.id_seccion }}</p>
-        </ion-label>
-      </ion-item>
-    </ion-item-sliding>
-  </ion-list>
-
+  <ion-img class="qr" *ngIf="mostrarImagen" [src]="imagenSrc" alt="Descripción de la imagen"></ion-img>
 
 </ion-content>

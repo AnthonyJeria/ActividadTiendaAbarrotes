@@ -17,10 +17,14 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card #card (click)="generarQR()" class="ion-text-center, button">
+  <ion-card #card (click)="iniciarClase()" class="ion-text-center, button">
     <ion-card-content>Iniciar clase</ion-card-content>
   </ion-card>
 
-  <ion-img class="qr" *ngIf="mostrarImagen" [src]="imagenSrc" alt="Descripción de la imagen"></ion-img>
+  <ion-card #card (click)="terminarClase()" class="ion-text-center, button">
+    <ion-card-content>Finalizar Clase</ion-card-content>
+  </ion-card>
+
+  <ion-img class="qr" *ngIf="mostrarImagen" [src]="imagenSrc" alt="Se lees esto, el qr si se genero pero no quiere aparecer aparecio"></ion-img>
 
 </ion-content>

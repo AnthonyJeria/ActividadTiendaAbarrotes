@@ -2,6 +2,7 @@ import { Injectable, NgModule } from "@angular/core";
 import { ClaseModel } from "../models/ServiciosModel";
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpClientModule } from '@angular/common/http';
 import { Observable, map, catchError } from "rxjs";
+import { createClient } from "@supabase/supabase-js";
 
 @Injectable({ providedIn: 'root' })
 export class ClaseService {
@@ -11,7 +12,7 @@ export class ClaseService {
     URL_QRGENERATOR = 'http://api.qrserver.com/v1/create-qr-code/?data='
 
     static this: any;
-
+   
     constructor(private http: HttpClient) {
 
     }
@@ -23,9 +24,8 @@ export class ClaseService {
         return this.http.get<any>(this.URL_SUPACLASE+'&select=*',{ headers: this.supabaseheaders.set('Accept', 'application/vnd.pgrst.object+json'), responseType: 'json' });
     }
 
-    QRgenerator(fecha: string, id_seccion: number , id_sala: number) {
-        const qr = this.URL_QRGENERATOR+fecha+id_seccion+id_sala+'&size=100x100'
+    QRgenerator(fecha: string) {
+        const qr = this.URL_QRGENERATOR+fecha+'&size=100x100'
         return qr;
     }
-
 }

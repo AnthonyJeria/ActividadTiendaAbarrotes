@@ -4,11 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { AlertController, IonicModule } from '@ionic/angular';
 import { Router, RouterLinkWithHref } from '@angular/router';
 import { ProfesorModel } from 'src/app/models/UsersModel';
-import { createClient } from '@supabase/supabase-js';
-import { environment } from 'src/environments/environment';
 import { ClaseService } from 'src/app/services/clase-service';
 import { HttpClientModule } from '@angular/common/http';
-
 
 @Component({
   selector: 'app-vista-profe',
@@ -25,8 +22,6 @@ export class VistaProfePage implements OnInit {
 
   mostrarImagen = false;
   imagenSrc = '../../assets/imagenes/logo.png';
-
-  private supabase_C = createClient(environment.supabaseUrl_C, environment.supabaseKey);
 
   constructor(private router: Router, private alertController: AlertController, private claseService: ClaseService) {
     this.userInfoReceived = this.router.getCurrentNavigation()?.extras.state?.['userInfo'];
@@ -75,34 +70,7 @@ export class VistaProfePage implements OnInit {
 
   iniciarClase(): void{
 
-    const today = new Date();
-    const fechaHoy = today.toISOString().split('T')[0];
-
-    this.supabase_C.from('Clase').select('id_clase').eq('estado',true).then(({ data, error }) => {
-      if (error) {
-        console.error('Error fetching data:', error);
-        
-      } else {
-
-        console.log(data);
-
-        if(data.length == 0){
-
-          this.supabase_C.from('Clase').insert({fecha: fechaHoy, id_seccion : 1, id_sala : 1, estado : true})
-          .then(({ data, error }) => {
-            if (error) {
-              console.error('Error fetching data:', error);
-            } else {
-              this.presentAlert();
-            }
-          });
-
-        }else{
-          this.presentAlert2();
-        }
-
-      }
-    });
+   
   }
 
   //--------------------------------------------------------------------------
@@ -130,30 +98,7 @@ export class VistaProfePage implements OnInit {
 
   terminarClase(): void{
 
-    this.supabase_C.from('Clase').select('id_clase').eq('estado',true).then(({ data, error }) => {
-      if (error) {
-        console.error('Error fetching data:', error);
-      } else {
-
-        console.log(data);
-
-        if(data.length >= 1){
-
-          this.supabase_C.from('Clase').update({estado : false}).eq('estado', true)
-          .then(({ data, error }) => {
-            if (error) {
-              console.error('Error fetching data:', error);
-            } else {
-              this.presentAlert3();
-            }
-          });
-
-        }else{
-          this.presentAlert4();
-        }
-
-      }
-    });
+    
   }
 
 }

@@ -27,5 +27,9 @@ export class HomePage {
   AbrirProfe(){
     this.route.navigate(['login-profe']);
   }
+
+  AbrirTest(){
+    this.route.navigate(['test']);
+  }
   
 }
